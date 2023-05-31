@@ -64,9 +64,19 @@ class Square:
                 print(" ", end="")
             for elem in range(self.size):
                 print("#", end="")
-            if row < (self.size - 1):
-                print()
+            print()
 
     def __str__(self):
-        self.my_print()
-        return ""
+        string_value = ""
+        if self.size == 0:
+            return string_value
+        for row in range(self.position[1]):
+            string_value = string_value + "\n"
+        for row in range(self.size):
+            for space in range(self.position[0]):
+                string_value = string_value + " "
+            for elem in range(self.size):
+                string_value = string_value + "#"
+            if row < (self.size - 1):
+                string_value = string_value + "\n"
+        return string_value
