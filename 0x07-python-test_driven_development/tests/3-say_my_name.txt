@@ -1,0 +1,98 @@
+import the function
+====================
+    >>> say_my_name = __import__("3-say_my_name").say_my_name
+
+bad input
+=========
+A) first_name is not a string
+    1. first_name is None
+    >>> say_my_name(None, "Lee")
+    Traceback (most recent call last):
+    ...
+    TypeError: first_name must be a string
+
+    2. first_name is a number
+    >>> say_my_name(12, "Lee")
+    Traceback (most recent call last):
+    ...
+    TypeError: first_name must be a string
+
+    3. first_name is a list
+    >>> say_my_name([12], "Lee")
+    Traceback (most recent call last):
+    ...
+    TypeError: first_name must be a string
+
+    4. first_name is a dictionary
+    >>> say_my_name({"value": 12}, "Lee")
+    Traceback (most recent call last):
+    ...
+    TypeError: first_name must be a string
+
+    5. first_name is a set
+    >>> say_my_name({12}, "Lee")
+    Traceback (most recent call last):
+    ...
+    TypeError: first_name must be a string
+
+    6. first_name is a tuple
+    >>> say_my_name((12,), "Lee")
+    Traceback (most recent call last):
+    ...
+    TypeError: first_name must be a string
+
+B) last_name is not a string
+    1. last_name is None
+    >>> say_my_name("Bruce", None)
+    Traceback (most recent call last):
+    ...
+    TypeError: last_name must be a string
+
+    2. last_name is a number
+    >>> say_my_name("Bruce", 12)
+    Traceback (most recent call last):
+    ...
+    TypeError: last_name must be a string
+
+    3. last_name is a list
+    >>> say_my_name("Bruce", [12])
+    Traceback (most recent call last):
+    ...
+    TypeError: last_name must be a string
+
+    4. last_name is a dictionary
+    >>> say_my_name("Bruce", {"value": 12})
+    Traceback (most recent call last):
+    ...
+    TypeError: last_name must be a string
+
+    5. last_name is a set
+    >>> say_my_name("Bruce", {12})
+    Traceback (most recent call last):
+    ...
+    TypeError: last_name must be a string
+
+    6. last_name is a tuple
+    >>> say_my_name("Bruce", (12,))
+    Traceback (most recent call last):
+    ...
+    TypeError: last_name must be a string
+
+normal cases
+============
+    1. 2 Strings
+    >>> say_my_name("Bruce", "Lee")
+    My name is Bruce Lee
+    
+    2. 2 Empty Strings
+    >>> say_my_name("", "")
+    My name is  
+
+    3. 2 Whitespace Strings
+    >>> say_my_name(" ", " ")
+    My name is    
+
+    4. Omit last_name
+    >>> say_my_name("Bob")
+    My name is Bob 
+
