@@ -1,0 +1,113 @@
+iimport the function
+====================
+        >>> add_integer = __import__("0-add_integer").add_integer
+
+bad input
+=========
+A) bad input for a
+        1. a is None
+        >>> add_integer(None, 1)
+        Traceback (most recent call last):
+        ...
+        TypeError: a must be an integer
+
+        2. a is a string
+        >>> add_integer("12", 1)
+        Traceback (most recent call last):
+        ...
+        TypeError: a must be an integer
+
+        3. a is a list
+        >>> add_integer([12], 1)
+        Traceback (most recent call last):
+        ...
+        TypeError: a must be an integer
+
+        4. a is a dictionary
+        >>> add_integer({"value": 12}, 1)
+        Traceback (most recent call last):
+        ...
+        TypeError: a must be an integer
+
+        5. a is a set
+        >>> add_integer({12}, 1)
+        Traceback (most recent call last):
+        ...
+        TypeError: a must be an integer
+
+        6. a is a tuple
+        >>> add_integer((12,), 1)
+        Traceback (most recent call last):
+        ...
+        TypeError: a must be an integer
+
+B) bad input for b
+        1. b is None
+        >>> add_integer(1, None)
+        Traceback (most recent call last):
+        ...
+        TypeError: b must be an integer
+
+        2. b is a string
+        >>> add_integer(1, "12")
+        Traceback (most recent call last):
+        ...
+        TypeError: b must be an integer
+
+        3. b is a list
+        >>> add_integer(1, [12])
+        Traceback (most recent call last):
+        ...
+        TypeError: b must be an integer
+
+        4. b is a dictionary
+        >>> add_integer(1, {"value": 12})
+        Traceback (most recent call last):
+        ...
+        TypeError: b must be an integer
+
+        5. b is a set
+        >>> add_integer(1, {12})
+        Traceback (most recent call last):
+        ...
+        TypeError: b must be an integer
+
+        6. b is a tuple
+        >>> add_integer(1, (12,))
+        Traceback (most recent call last):
+        ...
+        TypeError: b must be an integer
+
+normal cases
+============
+        1. 2 Postive numbers
+        >>> add_integer(10, 13)
+        23
+        >>> add_integer(10.5, 13.2)
+        23
+
+        2. 2 Negative numbers
+        >>> add_integer(-5, -2)
+        -7
+        >>> add_integer(-5.1, -2.8)
+        -7
+
+        3. 1 Positive & 1 Negative
+        >>> add_integer(5, -1)
+        4
+        >>> add_integer(5.6, -1.09)
+        4
+
+        4. Omit argument b
+        >>> add_integer(1)
+        99
+        >>> add_integer(1.9)
+        99
+        
+
+edge cases
+==========
+large numbers
+
+boundary numbers (overflow)
+
