@@ -1,0 +1,66 @@
+import the function
+====================
+    >>> text_indentation = __import__("5-text_indentation").text_indentation
+
+normal cases
+============
+1. Basic text with delimeters [. : ?]
+    >>> text_indentation("This is a sentence. This is another sentence? And here's a third one:")
+    This is a sentence.
+    <BLANKLINE>
+    This is another sentence?
+    <BLANKLINE>
+    And here's a third one:
+
+2. Text with multiple consecutive delimeters [. ? :]
+    >>> text_indentation("This is... a sentence")
+    This is.
+    <BLANKLINE>
+    .
+    <BLANKLINE>
+    .
+    <BLANKLINE>
+    a sentence
+
+3. Text with leading and trailing spaces
+    >>> text_indentation("   This is a sentence.   This is another sentence?")
+    This is a sentence.
+    <BLANKLINE>
+    This is another sentence?
+
+edge cases
+==========
+1. Empty text
+    >>> text_indentation("")
+   
+2. Text with only whitespace characters
+    >>> text_indentation("        ")
+
+3. Text without delimiters [. ? :]
+    >>> text_indentation("This is a sentence with no special characters")
+    This is a sentence with no special characters
+
+4. Text with single delimiter (.)
+    >>> text_indentation("This is a sentence with a period.")
+    This is a sentence with a period.
+
+5. Text with delimiter at the start and end
+    >>> text_indentation(". Sentence One. Sentence Two?")
+    .
+    <BLANKLINE>
+    Sentence One.
+    <BLANKLINE>
+    Sentence Two?
+   
+6. Text with multiple consecutive spaces between characters
+    >>> text_indentation("This      is      a      sentence.     This     is     another     sentence?")
+    This      is      a      sentence.
+    <BLANKLINE>
+    This     is     another     sentence?
+
+7. Text with non-string input
+    >>> text_indentation(12)
+    Traceback (most recent call last):
+        ...
+    TypeError: text must be a string
+
