@@ -107,7 +107,14 @@ normal cases
 
 edge cases
 ==========
-large numbers
+        1. NAN as a float
+	>>> add_integer(1, float('nan'))
+        Traceback (most recent call last):
+        ...
+        ValueError: cannot convert float NaN to integer
 
-boundary numbers (overflow)
-
+        2. inf as a float (overflow)
+        >>> add_integer(1, float('inf'))       
+        Traceback (most recent call last):
+        ...
+        OverflowError: cannot convert float infinity to integer
