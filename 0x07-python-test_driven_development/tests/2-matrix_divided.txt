@@ -92,21 +92,29 @@ edge cases
     ...
     TypeError: Each row of the matrix must have the same size
 
-10. div is float(inf)
-    >>> matrix_divided([[0, 0], [0, 0]], float('inf'))
-    [[0.0, 0.0], [0.0, 0.0]]
-
-11. 1 Missing argument
+10. 1 Missing argument
     >>> matrix_divided([[0, 0], [0, 0]])
     Traceback (most recent call last):
     ...
     TypeError: matrix_divided() missing 1 required positional argument: 'div'
 
-12. 2 Missing arguments
+11. 2 Missing arguments
     >>> matrix_divided()
     Traceback (most recent call last):
     ...
     TypeError: matrix_divided() missing 2 required positional arguments: 'matrix' and 'div'
+
+12. Infinity divisor
+    >>> matrix_divided([[1, 2], [3, 4]], float('inf'))
+    [[0.0, 0.0], [0.0, 0.0]]
+
+13. Infinity in numerator
+    >>> matrix_divided([[1, 2], [3, float('inf')]], 2)
+    [[0.5, 1.0], [1.5, inf]]
+
+14. Infinity in numerator and denominator
+    >>> matrix_divided([[1, 2], [3, float('inf')]], float('inf'))
+    [[0.0, 0.0], [0.0, nan]]
 
 Valid Input & Output after function operation
 =============================================
