@@ -92,6 +92,22 @@ edge cases
     ...
     TypeError: Each row of the matrix must have the same size
 
+10. div is float(inf)
+    >>> matrix_divided([[0, 0], [0, 0]], float('inf'))
+    [[0.0, 0.0], [0.0, 0.0]]
+
+11. 1 Missing argument
+    >>> matrix_divided([[0, 0], [0, 0]])
+    Traceback (most recent call last):
+    ...
+    TypeError: matrix_divided() missing 1 required positional argument: 'div'
+
+12. 2 Missing arguments
+    >>> matrix_divided()
+    Traceback (most recent call last):
+    ...
+    TypeError: matrix_divided() missing 2 required positional arguments: 'matrix' and 'div'
+
 Valid Input & Output after function operation
 =============================================
 1. Output rounded to 2 decimal places
@@ -105,4 +121,3 @@ Valid Input & Output after function operation
     [[0.5, 1.0], [1.5, 2.0]]
     >>> matrix
     [[1, 2], [3, 4]]
-
