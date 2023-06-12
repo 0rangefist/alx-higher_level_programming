@@ -1,0 +1,126 @@
+import the class
+====================
+    >>> BaseGeometry = __import__("7-base_geometry").BaseGeometry
+
+instantiation of a BaseGeometry object
+======================================
+    >>> bg = BaseGeometry()
+
++++++++++++++++++++++++++++++++++
++ METHOD 1: integer_validator() +
++++++++++++++++++++++++++++++++++
+
+correct input(positive integers)
+================================
+    >>> bg.integer_validator("my_int", 1)
+
+    >>> bg.integer_validator("my_int", 10000000)
+
+bad input (0 & negative integers)
+=================================
+0 input
+    >>> bg.integer_validator("my_input", 0)
+    Traceback (most recent call last):
+    ...
+    ValueError: my_input must be greater than 0
+
+negative input
+    >>> bg.integer_validator("my_input", -2000)
+    Traceback (most recent call last):
+    ...
+    ValueError: my_input must be greater than 0
+
+bad input (wrong types)
+=======================
+float input
+    >>> bg.integer_validator("my_input", 1.5)
+    Traceback (most recent call last):
+    ...
+    TypeError: my_input must be an integer
+
+string input
+    >>> bg.integer_validator("my_input", "20")
+    Traceback (most recent call last):
+    ...
+    TypeError: my_input must be an integer
+
+boolean input
+    >>> bg.integer_validator("my_input", False)
+    Traceback (most recent call last):
+    ...
+    TypeError: my_input must be an integer
+
+list input
+    >>> bg.integer_validator("my_input", [1, 2, 3])
+    Traceback (most recent call last):
+    ...
+    TypeError: my_input must be an integer
+
+tuple input
+    >>> bg.integer_validator("my_input", (1, 2, 3))
+    Traceback (most recent call last):
+    ...
+    TypeError: my_input must be an integer
+
+set input
+    >>> bg.integer_validator("my_input", {1, 2, 3})
+    Traceback (most recent call last):
+    ...
+    TypeError: my_input must be an integer
+
+dictionary input
+    >>> bg.integer_validator("my_input", {"input": 3})
+    Traceback (most recent call last):
+    ...
+    TypeError: my_input must be an integer
+
+None input
+    >>> bg.integer_validator("my_input", None)
+    Traceback (most recent call last):
+    ...
+    TypeError: my_input must be an integer
+
+bad input (wrong number of arguments)
+=====================================
+only one argumement input
+    >>> bg.integer_validator("my_input")
+    Traceback (most recent call last):
+    ...
+    TypeError: integer_validator() missing 1 required positional argument: 'value'
+
+no arguments
+    >>> bg.integer_validator()
+    Traceback (most recent call last):
+    ...
+    TypeError: integer_validator() missing 2 required positional arguments: 'name' and 'value'
+
+three argumements
+    >>> bg.integer_validator("my_input", 12, 13)
+    Traceback (most recent call last):
+    ...
+    TypeError: integer_validator() takes 3 positional arguments but 4 were given
+
+++++++++++++++++++++
++ METHOD 2: area() +
+++++++++++++++++++++
+
+correct case
+============
+    >>> bg.area()
+    Traceback (most recent call last):
+    ...
+    Exception: area() is not implemented
+
+bad input(wrong number of arguments)
+====================================
+one argument
+    >>> bg.area(12)
+    Traceback (most recent call last):
+    ...
+    TypeError: area() takes 1 positional argument but 2 were given
+
+two arguments
+    >>> bg.area(12, 3)
+    Traceback (most recent call last):
+    ...
+    TypeError: area() takes 1 positional argument but 3 were given
