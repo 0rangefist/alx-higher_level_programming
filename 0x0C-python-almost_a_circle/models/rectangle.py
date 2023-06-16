@@ -37,6 +37,28 @@ class Rectangle(Base):
                 print("#", end="")
             print()
 
+    def update(self, *args):
+        """
+        Assigns each element in a list of arguments
+        to respective attributes in the Rectangle instance
+        1st argument is the id attribute
+        2nd argument is the width attribute
+        3rd argument is the height attribute
+        4th argument is the x attribute
+        5th argument is the y attribute
+        """
+        for index, arg in enumerate(args):
+            if index == 0:
+                self.id = arg
+            if index == 1:
+                self.width = arg
+            if index == 2:
+                self.height = arg
+            if index == 3:
+                self.x = arg
+            if index == 4:
+                self.y = arg
+
     def __str__(self):
         return (
             f"[Rectangle] ({self.id}) {self.x}/{self.y} - "
