@@ -79,3 +79,8 @@ class TestRectangleClass(unittest.TestCase):
         for bad_input_value in bad_input_values:
             with self.assertRaisesRegex(ValueError, "y must be >= 0"):
                 self.rect1.y = bad_input_value
+
+    def test_area(self):
+        self.assertEqual(self.rect1.area(), 20)
+        # rect2 isn't tested since it may be modified by test_setters()
+        self.assertEqual(self.rect3.area(), 36)
