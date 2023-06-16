@@ -28,8 +28,12 @@ class Rectangle(Base):
         """
         Prints to stdout the Rectangle instance with # chars
         """
-        for i in range(self.height):
-            for j in range(self.width):
+        for row in range(self.y):
+            print()
+        for row in range(self.height):
+            for space in range(self.x):
+                print(" ", end="")
+            for elem in range(self.width):
                 print("#", end="")
             print()
 

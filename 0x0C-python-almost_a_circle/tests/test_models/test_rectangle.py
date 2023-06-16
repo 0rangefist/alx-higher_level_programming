@@ -100,6 +100,12 @@ class TestRectangleClass(unittest.TestCase):
             self.rect5.display()
             self.assertEqual(mock_output.getvalue(), expected_output)
 
+        self.rect6 = Rectangle(2, 3, 1, 2)
+        expected_output = "\n\n ##\n ##\n ##\n"
+        with patch("sys.stdout", new=StringIO()) as mock_output:
+            self.rect6.display()
+            self.assertEqual(mock_output.getvalue(), expected_output)
+
     def test_str(self):
         rect = Rectangle(2, 4, 1, 3, 15)
         rect_str = str(rect)
