@@ -99,3 +99,8 @@ class TestRectangleClass(unittest.TestCase):
         with patch("sys.stdout", new=StringIO()) as mock_output:
             self.rect5.display()
             self.assertEqual(mock_output.getvalue(), expected_output)
+
+    def test_str(self):
+        rect = Rectangle(2, 4, 1, 3, 15)
+        rect_str = str(rect)
+        self.assertEqual(rect_str, "[Rectangle] (15) 1/3 - 2/4")
