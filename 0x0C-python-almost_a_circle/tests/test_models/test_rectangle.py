@@ -4,6 +4,8 @@
 Unittest for Rectangle class
 """
 import unittest
+from unittest.mock import patch
+from io import StringIO
 from models.rectangle import Rectangle
 
 
@@ -84,3 +86,16 @@ class TestRectangleClass(unittest.TestCase):
         self.assertEqual(self.rect1.area(), 20)
         # rect2 isn't tested since it may be modified by test_setters()
         self.assertEqual(self.rect3.area(), 36)
+
+    def test_display(self):
+        self.rect4 = Rectangle(2, 3)
+        expected_output = "##\n##\n##\n"
+        with patch("sys.stdout", new=StringIO()) as mock_output:
+            self.rect4.display()
+            self.assertEqual(mock_output.getvalue(), expected_output)
+
+        self.rect5 = Rectangle(1, 1)
+        expected_output = "#\n"
+        with patch("sys.stdout", new=StringIO()) as mock_output:
+            self.rect5.display()
+            self.assertEqual(mock_output.getvalue(), expected_output)
