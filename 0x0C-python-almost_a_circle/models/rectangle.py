@@ -53,11 +53,11 @@ class Rectangle(Base):
             attrs = ["id", "width", "height", "x", "y"]
             for i, arg in enumerate(args):
                 setattr(self, attrs[i], arg)
-
-        for key, value in kwargs.items():
-            # update existing attr that matches the key
-            if hasattr(self, key):
-                setattr(self, key, value)
+        else:
+            for key, value in kwargs.items():
+                # update existing attr that matches the key
+                if hasattr(self, key):
+                    setattr(self, key, value)
 
     def __str__(self):
         return (

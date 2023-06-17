@@ -32,3 +32,14 @@ class TestSquareClass(unittest.TestCase):
         square = Square(4, 1, 2, 10)
         square_str = str(square)
         self.assertEqual(square_str, "[Square] (10) 1/2 - 4")
+
+    def test_square_size_getter(self):
+        square = Square(5)
+        self.assertEqual(square.size, 5)
+
+    def test_square_size_setter(self):
+        square = Square(5)
+        square.size = 8
+        self.assertEqual(square.size, 8)
+        self.assertEqual(square.width, 8)
+        self.assertEqual(square.height, 8)

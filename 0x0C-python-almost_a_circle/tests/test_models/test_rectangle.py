@@ -111,8 +111,7 @@ class TestRectangleClass(unittest.TestCase):
         rect_str = str(rect)
         self.assertEqual(rect_str, "[Rectangle] (15) 1/3 - 2/4")
 
-    def test_update(self):
-        # testing args list
+    def test_update_with_args(self):
         rect = Rectangle(2, 3, 1, 1, 10)
         rect.update(20, 5, 6, 2, 8)
         self.assertEqual(rect.id, 20)
@@ -121,7 +120,7 @@ class TestRectangleClass(unittest.TestCase):
         self.assertEqual(rect.x, 2)
         self.assertEqual(rect.y, 8)
 
-        # testing kwargs dictionary
+    def test_update_with_kwargs(self):
         rect = Rectangle(3, 6, 2, 4, 22)
         rect.update(height=8, y=7, width=4, x=3)
         self.assertEqual(rect.id, 22)
@@ -130,11 +129,11 @@ class TestRectangleClass(unittest.TestCase):
         self.assertEqual(rect.x, 3)
         self.assertEqual(rect.y, 7)
 
-        # testing mix of args and kwargs
-        rect = Rectangle(12, 16, 1, 8, 23)
+    def test_update_with_args_and_kwargs(self):
+        rect = Rectangle(12, 16, 1, 9, 23)
         rect.update(25, 4, 8, y=7, x=3)
         self.assertEqual(rect.id, 25)
         self.assertEqual(rect.width, 4)
         self.assertEqual(rect.height, 8)
-        self.assertEqual(rect.x, 3)
-        self.assertEqual(rect.y, 7)
+        self.assertEqual(rect.x, 1)
+        self.assertEqual(rect.y, 9)
