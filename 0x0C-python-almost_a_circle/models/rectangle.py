@@ -37,7 +37,7 @@ class Rectangle(Base):
                 print("#", end="")
             print()
 
-    def update(self, *args):
+    def update(self, *args, **kwargs):
         """
         Assigns each element in a list of arguments
         to respective attributes in the Rectangle instance
@@ -46,18 +46,18 @@ class Rectangle(Base):
         3rd argument is the height attribute
         4th argument is the x attribute
         5th argument is the y attribute
+        If *args is empty, each key in **kwargs represents an
+        attribute to the instance
         """
-        for index, arg in enumerate(args):
-            if index == 0:
-                self.id = arg
-            if index == 1:
-                self.width = arg
-            if index == 2:
-                self.height = arg
-            if index == 3:
-                self.x = arg
-            if index == 4:
-                self.y = arg
+        if args and len(args) > 0:
+            attrs = ["id", "width", "height", "x", "y"]
+            for i, arg in enumerate(args):
+                setattr(self, attrs[i], arg)
+
+        for key, value in kwargs.items():
+            # update existing attr that matches the key
+            if hasattr(self, key):
+                setattr(self, key, value)
 
     def __str__(self):
         return (
