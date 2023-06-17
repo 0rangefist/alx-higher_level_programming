@@ -19,11 +19,11 @@ class TestRectangleClass(unittest.TestCase):
         self.rect2 = Rectangle(10, 2, 1, 1, 12)
         self.rect3 = Rectangle(12, 3)
 
-    def test_ids(self):
+    def test_rect_ids(self):
         self.assertNotEqual(self.rect1.id, self.rect2.id)
         self.assertEqual(self.rect2.id, 12)
 
-    def test_getters(self):
+    def test_rect_getters(self):
         self.assertEqual(self.rect1.width, 2)
         self.assertEqual(self.rect1.height, 10)
         self.assertEqual(self.rect1.x, 0)
@@ -34,7 +34,7 @@ class TestRectangleClass(unittest.TestCase):
         self.assertEqual(self.rect2.x, 1)
         self.assertEqual(self.rect2.y, 1)
 
-    def test_setters(self):
+    def test_rect_setters(self):
         self.rect2.width = 5
         self.rect2.height = 9
         self.rect2.x = 2
@@ -44,50 +44,50 @@ class TestRectangleClass(unittest.TestCase):
         self.assertEqual(self.rect2.x, 2)
         self.assertEqual(self.rect2.y, 3)
 
-    def test_width_type_validation(self):
+    def test_rect_width_type_validation(self):
         bad_input_types = [None, True, False, 5.5, [1, 2, 3], {"a": 1, "b": 2}]
         for bad_input_type in bad_input_types:
             with self.assertRaisesRegex(TypeError,
                                         "width must be an integer"):
                 self.rect1.width = bad_input_type
 
-    def test_width_value_validation(self):
+    def test_rect_width_value_validation(self):
         bad_input_values = [0, -1, -100, -100000]  # 0 and negatives
         for bad_input_value in bad_input_values:
             with self.assertRaisesRegex(ValueError, "width must be > 0"):
                 self.rect1.width = bad_input_value
 
-    def test_height_type_validation(self):
+    def test_rect_height_type_validation(self):
         bad_input_types = [None, True, False, 5.5, [1, 2, 3], {"a": 1, "b": 2}]
         for bad_input_type in bad_input_types:
             with self.assertRaisesRegex(TypeError,
                                         "height must be an integer"):
                 self.rect1.height = bad_input_type
 
-    def test_height_value_validation(self):
+    def test_rect_height_value_validation(self):
         bad_input_values = [0, -1, -100, -100000]  # 0 and negatives
         for bad_input_value in bad_input_values:
             with self.assertRaisesRegex(ValueError, "height must be > 0"):
                 self.rect1.height = bad_input_value
 
-    def test_x_value_validation(self):
+    def test_rect_x_value_validation(self):
         bad_input_values = [-1, -100, -100000]  # negatives
         for bad_input_value in bad_input_values:
             with self.assertRaisesRegex(ValueError, "x must be >= 0"):
                 self.rect1.x = bad_input_value
 
-    def test_y_value_validation(self):
+    def test_rect_y_value_validation(self):
         bad_input_values = [-1, -100, -100000]  # negatives
         for bad_input_value in bad_input_values:
             with self.assertRaisesRegex(ValueError, "y must be >= 0"):
                 self.rect1.y = bad_input_value
 
-    def test_area(self):
+    def test_rect_area(self):
         self.assertEqual(self.rect1.area(), 20)
         # rect2 isn't tested since it may be modified by test_setters()
         self.assertEqual(self.rect3.area(), 36)
 
-    def test_display(self):
+    def test_rect_display(self):
         self.rect4 = Rectangle(2, 3)
         expected_output = "##\n##\n##\n"
         with patch("sys.stdout", new=StringIO()) as mock_output:
@@ -106,12 +106,12 @@ class TestRectangleClass(unittest.TestCase):
             self.rect6.display()
             self.assertEqual(mock_output.getvalue(), expected_output)
 
-    def test_str(self):
+    def test_rect_str(self):
         rect = Rectangle(2, 4, 1, 3, 15)
         rect_str = str(rect)
         self.assertEqual(rect_str, "[Rectangle] (15) 1/3 - 2/4")
 
-    def test_update_with_args(self):
+    def test_rect_update_with_args(self):
         rect = Rectangle(2, 3, 1, 1, 10)
         rect.update(20, 5, 6, 2, 8)
         self.assertEqual(rect.id, 20)
@@ -120,7 +120,7 @@ class TestRectangleClass(unittest.TestCase):
         self.assertEqual(rect.x, 2)
         self.assertEqual(rect.y, 8)
 
-    def test_update_with_kwargs(self):
+    def test_rect_update_with_kwargs(self):
         rect = Rectangle(3, 6, 2, 4, 22)
         rect.update(height=8, y=7, width=4, x=3)
         self.assertEqual(rect.id, 22)
@@ -129,7 +129,7 @@ class TestRectangleClass(unittest.TestCase):
         self.assertEqual(rect.x, 3)
         self.assertEqual(rect.y, 7)
 
-    def test_update_with_args_and_kwargs(self):
+    def test_rect_update_with_args_and_kwargs(self):
         rect = Rectangle(12, 16, 1, 9, 23)
         rect.update(25, 4, 8, y=7, x=3)
         self.assertEqual(rect.id, 25)
@@ -138,7 +138,7 @@ class TestRectangleClass(unittest.TestCase):
         self.assertEqual(rect.x, 1)
         self.assertEqual(rect.y, 9)
 
-    def test_to_dictionary(self):
+    def test_rect_to_dictionary(self):
         rect = Rectangle(6, 7, 1, 2, 15)
         expected_dict = {
             "id": 15,
