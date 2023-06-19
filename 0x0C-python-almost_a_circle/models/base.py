@@ -3,6 +3,7 @@
 This module defines a Base class
 """
 import json
+import csv
 import os
 
 
@@ -91,3 +92,62 @@ class Base:
             instance_list.append(new_instance)
 
         return instance_list
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """
+        Serializes a list of instaces into a csv file
+        """
+        filename = cls.__name__ + ".csv"
+
+        # open the csv file for writing
+        with open(filename, "w") as file:
+            # setup appropriate fieldnames for serialization to csv
+            if cls.__name__ == "Rectangle":
+                fieldnames = ["id", "width", "height", "x", "y"]
+            elif cls.__name__ == "Square":
+                fieldnames = ["id", "size", "x", "y"]
+            else:
+                fieldnames = []
+
+            # we use csv.DictWriter to write a dictionary with
+            # specified fieldnames into a csv row
+            writer = csv.DictWriter(file, fieldnames=fieldnames)
+            # each object's dict repr in the list is saved as a csv row
+            for obj in list_objs:
+                writer.writerow(obj.to_dictionary())
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """
+        Deserializes from a csv file back to list of instances
+        """
+        filename = cls.__name__ + ".csv"
+
+        # if file doesn't exist
+        if not os.path.exists(filename):
+            return []  # return an empty list
+
+        list_instances = []
+        # open the csv file for reading
+        with open(filename) as file:
+            if cls.__name__ == "Rectangle":
+                fieldnames = ["id", "width", "height", "x", "y"]
+            elif cls.__name__ == "Square":
+                fieldnames = ["id", "size", "x", "y"]
+            else:
+                fieldnames = []
+            # we use csv.DictReader to read each csv row
+            # from the file into rows of dictionary objects
+            reader = csv.DictReader(file, fieldnames=fieldnames)
+
+            # Iterate over each row in the CSV file
+            for row in reader:
+                # Convert the values to integers
+                for key in row:
+                    row[key] = int(row[key])
+                # Create an instance from the dictionary
+                new_instance = cls.create(**row)
+                # Append the instance to the list
+                list_instances.append(new_instance)
+        return list_instances

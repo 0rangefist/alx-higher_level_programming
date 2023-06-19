@@ -225,9 +225,113 @@ class TestBaseClass(unittest.TestCase):
         with self.assertRaises(TypeError):
             Base.load_from_file(1)
 
+    def test_base_save_to_file_csv_with_rectangles(self):
+        # Create a list of rectangle instances
+        rect_list = [Rectangle(10, 5), Rectangle(8, 4)]
+        # Save the list of rectangles to a CSV file
+        Rectangle.save_to_file_csv(rect_list)
+        # Verify that the CSV file exists
+        self.assertTrue(os.path.exists("Rectangle.csv"))
+        # Verify that the CSV file isn't empty
+        if os.path.exists("Rectangle.csv"):
+            with open("Rectangle.csv") as file:
+                csv_content = file.read()
+                self.assertNotEqual(csv_content, "")
+
+    def test_base_save_to_file_csv_with_squares(self):
+        # Create a list of square instances
+        square_list = [Square(8), Square(9)]
+        # Save the list of squares to a CSV file
+        Square.save_to_file_csv(square_list)
+        # Verify that the CSV file exists
+        self.assertTrue(os.path.exists("Square.csv"))
+        # Verify that the CSV file isn't empty
+        if os.path.exists("Rectangle.csv"):
+            with open("Rectangle.csv") as file:
+                csv_content = file.read()
+                self.assertNotEqual(csv_content, "")
+
+    def test_base_save_to_file_csv_with_empty_list(self):
+        # Save an empty list to a CSV file
+        Rectangle.save_to_file_csv([])
+        # Verify that the CSV file exists
+        self.assertTrue(os.path.exists("Rectangle.csv"))
+        # Verify that the CSV file is empty
+        if os.path.exists("Rectangle.csv"):
+            with open("Rectangle.csv") as file:
+                csv_content = file.read()
+                self.assertEqual(csv_content, "")
+
+    def test_base_save_to_file_csv_with_none_list(self):
+        with self.assertRaises(TypeError):
+            # Save a None list to a CSV file
+            Square.save_to_file_csv(None)
+
+    def test_base_base_load_from_file_csv_with_rectangles(self):
+        # Create a list of rectangle instances
+        rect_list = [Rectangle(10, 5, 0, 0, 10), Rectangle(8, 4, 0, 0, 11)]
+        # Save the list of rectangles to a CSV file
+        Rectangle.save_to_file_csv(rect_list)
+        # Load the list of rectangles from the CSV file
+        loaded_rect_list = Rectangle.load_from_file_csv()
+        # Verify the loaded rectangle list
+        self.assertEqual(len(loaded_rect_list), 2)
+        self.assertEqual(loaded_rect_list[0].id, rect_list[0].id)
+        self.assertEqual(loaded_rect_list[0].width, rect_list[0].width)
+        self.assertEqual(loaded_rect_list[0].height, rect_list[0].height)
+        self.assertEqual(loaded_rect_list[0].x, rect_list[0].x)
+        self.assertEqual(loaded_rect_list[0].y, rect_list[0].y)
+        self.assertEqual(loaded_rect_list[1].id, rect_list[1].id)
+        self.assertEqual(loaded_rect_list[1].width, rect_list[1].width)
+        self.assertEqual(loaded_rect_list[1].height, rect_list[1].height)
+        self.assertEqual(loaded_rect_list[1].x, rect_list[1].x)
+        self.assertEqual(loaded_rect_list[1].y, rect_list[1].y)
+
+    def test_base_load_from_file_csv_with_squares(self):
+        # Create a list of square instances
+        square_list = [Square(8, 0, 0, 5), Square(9, 0, 0, 6)]
+        # Save the list of squares to a CSV file
+        Square.save_to_file_csv(square_list)
+        # Load the list of squares from the CSV file
+        loaded_square_list = Square.load_from_file_csv()
+        # Verify the loaded square list
+        self.assertEqual(len(loaded_square_list), 2)
+        self.assertEqual(loaded_square_list[0].id, square_list[0].id)
+        self.assertEqual(loaded_square_list[0].size, square_list[0].size)
+        self.assertEqual(loaded_square_list[0].x, square_list[0].x)
+        self.assertEqual(loaded_square_list[0].y, square_list[0].y)
+        self.assertEqual(loaded_square_list[1].id, square_list[1].id)
+        self.assertEqual(loaded_square_list[1].size, square_list[1].size)
+        self.assertEqual(loaded_square_list[1].x, square_list[1].x)
+        self.assertEqual(loaded_square_list[1].y, square_list[1].y)
+
+    def test_base_load_from_file_csv_with_empty_list(self):
+        # Save an empty list of rectangles to a CSV file
+        Rectangle.save_to_file_csv([])
+        # Load the list of rectangles from the CSV file
+        loaded_rect_list = Rectangle.load_from_file_csv()
+        # Verify the loaded rectangle list
+        self.assertEqual(len(loaded_rect_list), 0)
+
+    def test_base_load_from_file_csv_with_none_list(self):
+        with self.assertRaises(TypeError):
+            # Save a None list to a CSV file
+            Square.save_to_file_csv(None)
+
+    def test_base_load_from_file_csv_with_excess_args(self):
+        with self.assertRaises(TypeError):
+            # Save to csv with illegal excess arg
+            Square.save_to_file_csv([], "excess_arg")
+
     def tearDown(self):
-        # Delete the created files after each test
+        # Delete created json files after each test
         if os.path.exists("Rectangle.json"):
             os.remove("Rectangle.json")
         if os.path.exists("Square.json"):
             os.remove("Square.json")
+
+        # Delete created csv files after each test
+        if os.path.exists("Rectangle.csv"):
+            os.remove("Rectangle.csv")
+        if os.path.exists("Square.csv"):
+            os.remove("Square.csv")
