@@ -60,7 +60,13 @@ class Base:
         if not dictionary:
             return None
 
-        new_instance = cls(1, 1)  # create dummy instance
+        if cls.__name__ == "Rectangle":
+            new_instance = cls(1, 1)  # create dummy instance
+        elif cls.__name__ == "Square":
+            new_instance = cls(1)  # create dummy instance
+        else:
+            return None
+
         new_instance.update(**dictionary)  # dict used as kwargs
         return new_instance
 
