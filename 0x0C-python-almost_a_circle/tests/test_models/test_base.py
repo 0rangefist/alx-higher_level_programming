@@ -171,6 +171,60 @@ class TestBaseClass(unittest.TestCase):
         with self.assertRaises(TypeError):
             Rectangle.create("extra_arg", **dictionary)
 
+    def test_base_load_from_file_when_no_file(self):
+        # When the file (Rectangle.json) doesn't exist
+        rect_list = Rectangle.load_from_file()
+        self.assertEqual(rect_list, [])
+
+        # When the file (Square.json) doesn't exist
+        rect_list = Square.load_from_file()
+        self.assertEqual(rect_list, [])
+
+    def test_base_load_from_file(self):
+        # Test for loading rectangles
+        rect_list = [Rectangle(4, 5, 0, 0, 15), Rectangle(5, 6, 0, 0, 16)]
+        # Save list of rectangles to file
+        Rectangle.save_to_file(rect_list)
+        # Load list of rectangles from file
+        loaded_rect_list = Rectangle.load_from_file()
+        # Verify loaded rectangle list
+        self.assertEqual(len(loaded_rect_list), 2)
+        for elem in loaded_rect_list:
+            self.assertTrue(type(elem) == Rectangle)
+        self.assertEqual(loaded_rect_list[0].id, 15)
+        self.assertEqual(loaded_rect_list[0].width, 4)
+        self.assertEqual(loaded_rect_list[0].height, 5)
+        self.assertEqual(loaded_rect_list[0].x, 0)
+        self.assertEqual(loaded_rect_list[0].y, 0)
+        self.assertEqual(loaded_rect_list[1].id, 16)
+        self.assertEqual(loaded_rect_list[1].width, 5)
+        self.assertEqual(loaded_rect_list[1].height, 6)
+        self.assertEqual(loaded_rect_list[1].x, 0)
+        self.assertEqual(loaded_rect_list[1].y, 0)
+
+        # Test for loading squares
+        square_list = [Square(8, 0, 0, 10), Square(9, 0, 0, 11)]
+        # Save list of squares to file
+        Square.save_to_file(square_list)
+        # Load list of squares from file
+        loaded_square_list = Square.load_from_file()
+        # Verify loaded square list
+        self.assertEqual(len(loaded_square_list), 2)
+        for elem in loaded_square_list:
+            self.assertTrue(type(elem) == Square)
+        self.assertEqual(loaded_square_list[0].id, 10)
+        self.assertEqual(loaded_square_list[0].size, 8)
+        self.assertEqual(loaded_square_list[0].x, 0)
+        self.assertEqual(loaded_square_list[0].y, 0)
+        self.assertEqual(loaded_square_list[1].id, 11)
+        self.assertEqual(loaded_square_list[1].size, 9)
+        self.assertEqual(loaded_square_list[1].x, 0)
+        self.assertEqual(loaded_square_list[1].y, 0)
+
+    def test_base_load_from_file_excess_args(self):
+        with self.assertRaises(TypeError):
+            Base.load_from_file(1)
+
     def tearDown(self):
         # Delete the created files after each test
         if os.path.exists("Rectangle.json"):

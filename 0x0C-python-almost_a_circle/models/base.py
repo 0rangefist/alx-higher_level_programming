@@ -3,6 +3,7 @@
 This module defines a Base class
 """
 import json
+import os
 
 
 class Base:
@@ -61,3 +62,32 @@ class Base:
         new_instance = cls(1, 1)  # create dummy instance
         new_instance.update(**dictionary)  # dict used as kwargs
         return new_instance
+
+    @classmethod
+    def load_from_file(cls):
+        """
+        Returns a list of instances
+        """
+        filename = cls.__name__ + ".json"
+
+        # if file doesn't exist
+        if not os.path.exists(filename):
+            return []  # return an empty list
+
+        # read json string from a file
+        with open(filename) as file:
+            json_str = file.read()
+
+        # convert from json string into a list of dictionaries
+        dict_list = cls.from_json_string(json_str)
+
+        # convert list of dictionaries into a list of instances
+        instance_list = []
+        for dict in dict_list:
+            # convert each dict into an instance
+            new_instance = cls.create(**dict)
+
+            # append the new instance to instance_list
+            instance_list.append(new_instance)
+
+        return instance_list
