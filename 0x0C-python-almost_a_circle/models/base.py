@@ -49,3 +49,15 @@ class Base:
         filename = cls.__name__ + ".json"
         with open(filename, "w", encoding="utf-8") as file:
             file.write(cls.to_json_string(list_dictionaries))
+
+    @classmethod
+    def create(cls, **dictionary):
+        """
+        Returns an instance with all attributes already set
+        """
+        if not dictionary:
+            return None
+
+        new_instance = cls(1, 1)  # create dummy instance
+        new_instance.update(**dictionary)  # dict used as kwargs
+        return new_instance

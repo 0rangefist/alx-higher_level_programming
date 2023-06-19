@@ -139,6 +139,38 @@ class TestBaseClass(unittest.TestCase):
             read_content = file.read()
             self.assertEqual(read_content, "[]")
 
+    def test_base_create_rectangle(self):
+        # Create a rectangle from a dictionary representation
+        dictionary = {'id': 14, 'width': 4, 'height': 2}
+        rect = Rectangle.create(**dictionary)
+        self.assertEqual(rect.id, 14)
+        self.assertEqual(rect.width, 4)
+        self.assertEqual(rect.height, 2)
+
+    def test_base_create_square(self):
+        # Create a square from a dictionary representation
+        dictionary = {'id': 12, 'size': 5}
+        square = Square.create(**dictionary)
+        self.assertEqual(square.id, 12)
+        self.assertEqual(square.size, 5)
+
+    def test_base_create_with_empty_dictionary(self):
+        # Instance creation from empty dictionary returns None
+        dictionary = {}
+        instance = Base.create(**dictionary)
+        self.assertIsNone(instance)
+
+    def test_base_create_with_no_args(self):
+        # Instance creation with no argument returns None
+        instance = Base.create()
+        self.assertIsNone(instance)
+
+    def test_base_create_with_excess_args(self):
+        # Instance creation with excess arguments should raise TypeError
+        dictionary = {'id': 30, 'width': 3, 'height': 8}
+        with self.assertRaises(TypeError):
+            Rectangle.create("extra_arg", **dictionary)
+
     def tearDown(self):
         # Delete the created files after each test
         if os.path.exists("Rectangle.json"):
