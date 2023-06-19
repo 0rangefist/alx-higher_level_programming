@@ -70,11 +70,19 @@ class TestRectangleClass(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "height must be > 0"):
                 self.rect1.height = bad_input_value
 
+    def test_rect_x_type_validation(self):
+        with self.assertRaisesRegex(TypeError, "x must be an integer"):
+            self.rect1.x = "non_int_bad_input"
+
     def test_rect_x_value_validation(self):
         bad_input_values = [-1, -100, -100000]  # negatives
         for bad_input_value in bad_input_values:
             with self.assertRaisesRegex(ValueError, "x must be >= 0"):
                 self.rect1.x = bad_input_value
+
+    def test_rect_y_type_validation(self):
+        with self.assertRaisesRegex(TypeError, "y must be an integer"):
+            self.rect1.y = "non_int_bad_input"
 
     def test_rect_y_value_validation(self):
         bad_input_values = [-1, -100, -100000]  # negatives
