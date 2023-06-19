@@ -5,6 +5,7 @@ Unittest for Base class
 """
 import unittest
 import os
+import json
 from models.base import Base
 from models.rectangle import Rectangle
 from models.square import Square
@@ -51,6 +52,39 @@ class TestBaseClass(unittest.TestCase):
         # Test with more than one arg
         with self.assertRaises(TypeError):
             Base.to_json_string([], 1)
+
+    def test_base_from_json_string(self):
+        # Test with empty string
+        result = Base.from_json_string("")
+        self.assertEqual(result, [])
+
+        # Test with string containing empty list
+        result = Base.from_json_string("[]")
+        self.assertEqual(result, [])
+
+        # Test with None
+        result = Base.from_json_string(None)
+        self.assertEqual(result, [])
+
+        # Test with valid json string
+        json_str = json.dumps([
+            {'id': 89, 'width': 10, 'height': 4},
+            {'id': 7, 'width': 1, 'height': 7}
+        ])
+        result = Base.from_json_string(json_str)
+        expected = [
+            {'id': 89, 'width': 10, 'height': 4},
+            {'id': 7, 'width': 1, 'height': 7}
+        ]
+        self.assertEqual(result, expected)
+
+        # Test with no args
+        with self.assertRaises(TypeError):
+            Base.from_json_string()
+
+        # Test with more than one arg
+        with self.assertRaises(TypeError):
+            Base.from_json_string("[]", 1)
 
     def test_base_save_to_file_rect(self):
         # Test saving a list of Rectangles to a JSON file
