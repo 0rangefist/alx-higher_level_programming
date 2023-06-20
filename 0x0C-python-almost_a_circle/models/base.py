@@ -5,6 +5,7 @@ This module defines a Base class
 import json
 import csv
 import os
+import turtle
 
 
 class Base:
@@ -37,6 +38,59 @@ class Base:
         if not json_string:
             return []
         return json.loads(json_string)
+
+    @staticmethod
+    def draw(list_rectangles, list_squares):
+        """
+        Opens a window and draws all rectangles and squares
+        """
+        # setup window
+        s = turtle.getscreen()  # open window
+        turtle.title("Rectangles & Squares")  # set window title
+        turtle.bgcolor("#2d3534")  # set background colour
+
+        # setup pen
+        t = turtle. getturtle()  # get turtle for drawing
+        t.shape("turtle")  # set pen shape to turtle
+
+        # pen settings for drawing rectangles
+        t.pen(
+            pencolor="#d7e1e0",
+            fillcolor="#145f7a",
+            pensize=5,
+            pendown=False)
+        # iterate through all rectangles
+        for rectangle in list_rectangles:
+            # set drawing start co-ordinates (x & y offsets)
+            t.goto(rectangle.x, rectangle.y)
+
+            # draw the rectangle
+            t.pendown()
+            t.begin_fill()
+            for _ in range(2):
+                t.forward(rectangle.width)
+                t.left(90)
+                t.forward(rectangle.height)
+                t.left(90)
+            t.end_fill()
+            t.penup()
+
+        # pen settings for drawing squares
+        t.pen(pencolor="#e04500", speed=4, pensize=3, pendown=False)
+        # iterate through all squares
+        for square in list_squares:
+            # set drawing start co-ordinates (x & y offsets)
+            t.goto(square.x, square.y)
+
+            # draw the square
+            t.pendown()
+            for _ in range(4):
+                t.forward(100)
+                t.left(90)
+            t.penup()
+
+        # exit window on click
+        turtle.exitonclick()
 
     @classmethod
     def save_to_file(cls, list_objs):
