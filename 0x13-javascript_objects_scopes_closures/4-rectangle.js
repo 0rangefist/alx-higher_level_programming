@@ -12,10 +12,10 @@ class Rectangle {
     }
   }
 
-  print () {
+  print (char = 'X') {
     for (let row = 0; row < this.height; row++) {
       for (let col = 0; col < this.width; col++) {
-        process.stdout.write('X');
+        process.stdout.write(char);
       }
       console.log();
     }
