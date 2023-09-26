@@ -6,7 +6,7 @@ const argc = process.argv.length;
 const argv = process.argv;
 
 if (argc < 4) {
-  console.log('Usage: ./0-readme.js <file_path> <your_content');
+  console.log('Usage: ./1-writeme.js <file_path> <your_content>');
   process.exit();
 }
 
